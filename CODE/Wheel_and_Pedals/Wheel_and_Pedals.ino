@@ -1,9 +1,9 @@
 #include <Joystick.h>
-Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD, 0, 0, true, true,true, true, true, true, true, true, true, true, true);
-//, 0, 0, true, true,true, false, false, true, false, true, true, true, true //this is the defalt that i tried with at first
-//hidReportId //joystickType //buttonCount //hatSwitchCount //includeXAxis -> Gas  //includeYAxis -> Brake//includeZAxis -> Clutch//includeRxAxis//includeRyAxis//includeRzAxis //includeRudder //includeThrottle//includeAccelerator//includeBrake //includeSteering //this is the explenation for the constructor
-
+Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD, 0, 0, true, true,true, false, false, false, false, false, false, false, false);
+//, 0, 0, true, true,true, false, false, true, false, true, true, true, true
+//hidReportId //joystickType //buttonCount //hatSwitchCount //includeXAxis -> Gas  //includeYAxis -> Brake//includeZAxis -> Clutch//includeRxAxis//includeRyAxis//includeRzAxis //includeRudder //includeThrottle//includeAccelerator//includeBrake //includeSteering
 //Constants:
+
 const int potPin = A0; //pin A0 to read analog input
 const int potPin2 = A1;
 const int potPin3 = A2;
@@ -23,12 +23,12 @@ void setup(){
 }
 
 void loop(){
-  Serial.println("****new loop****");//for debugging purpose
+  Serial.println("****new loop****");
   value = analogRead(potPin);   //Read and save analog value from potentiometer
   value2 = analogRead(potPin2);
   value3 = analogRead(potPin3);
-  
-//following code for debugging purposes only
+  //value = map(value, 0, 1023, 0, 255); //Map value 0-1023 to 0-255 (PWM)
+  //analogWrite(ledPin, value); //Send PWM value to led
    Serial.println("gas: ");
   Serial.println(value);
   Serial.println("brake: ");
@@ -37,10 +37,9 @@ void loop(){
   Serial.println( value3/2);
 
 
-//here starts the setting up of the axis
-  Joystick.setXAxis(value/2);//.setThrottle
 
-  Joystick.setYAxis(value2/2);
- //delay(1000);                          //Small delay//that we just need for debugging purpose only
+Joystick.setXAxis(value/2);//.setThrottle
+Joystick.setYAxis(value2/2);
+
 Joystick.setZAxis(value3);
 }
