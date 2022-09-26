@@ -39,6 +39,7 @@ void loop(){
 
 
 Joystick.setXAxis(value/2);//.setThrottle
+
 Joystick.setYAxis(value2/2);
 
 Joystick.setZAxis(value3);
