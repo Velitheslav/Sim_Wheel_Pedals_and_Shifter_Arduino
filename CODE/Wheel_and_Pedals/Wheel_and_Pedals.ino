@@ -7,13 +7,15 @@ Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD, 3, 0, true,
 const int potPin = A0; //pin A0 to read analog input
 const int potPin2 = A1;
 const int potPin3 = A2;
-const int but1=8;
+const int but1=A5;
 
 //Variables:
 int value; //save analog value
 int value2;
 int value3;
 int button1=0;
+//bool canBeChanged=true;
+int oldState=LOW;
 
 void setup(){
   //Input or output?
@@ -33,6 +35,7 @@ void loop(){
   value2 = analogRead(potPin2);
   value3 = analogRead(potPin3);
   button1 = digitalRead(but1);
+
   //value = map(value, 0, 1023, 0, 255); //Map value 0-1023 to 0-255 (PWM)
   //analogWrite(ledPin, value); //Send PWM value to led
    Serial.println("gas: ");
@@ -55,12 +58,17 @@ void loop(){
 
  
   if (button1 == HIGH) {
-    
-    Joystick.setButton(button1, 10);
+    //if(oldState==LOW){
+      Joystick.setButton(button1, 32);
+      Serial.println("pressed");
+      oldState=HIGH;
+    //}
     
   } else  {
-    
-   Joystick.setButton(button1, 10);
-  }
-  
+    //if(oldState==HIGH){
+      Joystick.setButton(button1, 0);
+      Serial.println("almost pressed");
+      oldState=LOW;
+    //}
+   }
 }
