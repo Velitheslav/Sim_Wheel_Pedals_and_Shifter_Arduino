@@ -6,7 +6,7 @@ Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD, 3, 0, true,
 
 const int potPin = A0; //pin A0 to read analog input
 const int potPin2 = A1;
-const int potPin3 = A2;
+const int potPin3 = A2;r
 const int but1=2;
 
 //Variables:
